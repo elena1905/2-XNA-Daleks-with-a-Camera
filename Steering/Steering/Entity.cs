@@ -41,8 +41,12 @@ namespace Steering
             get { return mass; }
             set { mass = value; }
         }
+
         public Vector3 force = Vector3.Zero;
+
+        // Member functions
         public abstract void LoadContent();
+
         public virtual void Update(GameTime gameTime)
         {
             if (look != basis)
@@ -56,7 +60,9 @@ namespace Steering
                 worldTransform = Matrix.CreateTranslation(pos);
             }
         }
+
         public abstract void Draw(GameTime gameTime);
+
         public abstract void UnloadContent();
 
         public void yaw(float angle)

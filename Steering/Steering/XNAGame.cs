@@ -75,17 +75,22 @@ namespace Steering
             int midY = GraphicsDeviceManager.DefaultBackBufferWidth / 2;
             Mouse.SetPosition(midX, midY);
 
+            // Add player dalek
             dalek = new Dalek();
             dalek.pos = new Vector3(0, 0, 0);
             dalek.DrawAxis = true;
             children.Add(dalek);
 
+            // Add enemy dalek
             EnemyDalek enemy = new EnemyDalek();
             enemy.pos = new Vector3(10, 0, -10);
             enemy.DrawAxis = true;
             children.Add(enemy);
-                                   
+
+            // Add camera
             children.Add(camera);
+
+            // Add ground
             ground = new Ground();                        
             children.Add(ground);
 
@@ -128,7 +133,7 @@ namespace Steering
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
+            // Allow the game to exit when Esc key pressed
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.Escape))
             {
@@ -138,6 +143,7 @@ namespace Steering
             for (int i = 0; i < children.Count; i++)
             {
                 children[i].Update(gameTime);
+
                 if (!children[i].Alive)
                 {
                     children.Remove(children[i]);
@@ -154,6 +160,7 @@ namespace Steering
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
             spriteBatch.Begin();
             foreach (Entity child in children)
             {

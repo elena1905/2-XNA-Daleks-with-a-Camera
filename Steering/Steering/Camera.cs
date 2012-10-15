@@ -15,7 +15,6 @@ namespace Steering
 {
     public class Camera : Entity
     {
-        
         public Matrix projection;
         public Matrix view;
         private KeyboardState keyboardState;
@@ -58,21 +57,19 @@ namespace Steering
 
             yaw(-(float)deltaX / 100.0f);
             pitch(-(float)deltaY / 100.0f);
-           Mouse.SetPosition(midX, midY);
+            Mouse.SetPosition(midX, midY);
 
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                Vector3 newTargetPos= pos + (look * 50.0f);
+                Vector3 newTargetPos = pos + (look * 50.0f);
                 //newTargetPos.Y = 10;
                 XNAGame.Instance().Dalek.targetPos = newTargetPos;
-                
             }
 
             if (mouseState.RightButton == ButtonState.Pressed)
             {
                 Vector3 newTargetPos = pos;
                 XNAGame.Instance().Dalek.targetPos = newTargetPos;
-
             }
             
 
@@ -103,7 +100,6 @@ namespace Steering
             
             view = Matrix.CreateLookAt(pos, pos + look, up);
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f), XNAGame.Instance().GraphicsDeviceManager.GraphicsDevice.Viewport.AspectRatio, 1.0f, 10000.0f);
-            
         }
 
         public Matrix getProjection()
@@ -115,7 +111,5 @@ namespace Steering
         {
             return view;
         }
-
-        
     }
 }
