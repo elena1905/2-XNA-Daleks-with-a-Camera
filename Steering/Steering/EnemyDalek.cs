@@ -31,17 +31,14 @@ namespace Steering
         public override void Update(GameTime gameTime)
         {
             Dalek player = XNAGame.Instance().Dalek;
+            Vector3 toTarget = player.pos - pos;
+
             float timeDelta = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
             // Calculate the look vector to make the AI Dalek point at the player dalek
-            
+            look = Vector3.Normalize(toTarget);
 
-
-
-
-
-
-            //
+            // 
 
             if (look != basis)
             {
