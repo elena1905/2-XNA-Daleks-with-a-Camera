@@ -32,14 +32,21 @@ namespace Steering
         {
             Dalek player = XNAGame.Instance().Dalek;
             Vector3 toTarget = player.pos - pos;
+            float distance = toTarget.Length();
+            float fireAngle = (float)Math.Acos(Vector3.Dot(Vector3.Normalize(look), Vector3.Normalize(toTarget)));
 
             float timeDelta = (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Calculate the look vector to make the AI Dalek point at the player dalek
-            look = Vector3.Normalize(toTarget);
+            // Calculate the look vector
+            // to make the AI Dalek point at the player dalek
+            // when distance is less than 20 and
+            // player comes within 45 degree of its look vector
+            if (fireAngle < 45 && distance < 20)
+            {
+                look = Vector3.Normalize(toTarget);
+            }
 
             // 
-
             if (look != basis)
             {
                 float yawAngle = getYaw();
