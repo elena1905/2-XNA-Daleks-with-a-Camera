@@ -88,7 +88,6 @@ namespace Steering
         {
             
             pos += right * amount;
-
         }
 
         public float getYaw()
@@ -96,9 +95,16 @@ namespace Steering
             float angle = 0.0f;
 
             // Calculate the YAW angle based on my look and basis vectors
-                       
-            return angle;
+            if (look.X < 0)
+            {
+                angle = (float)Math.Acos(Vector3.Dot(basis, Vector3.Normalize(look)));
+            }
+            else
+            {
+                angle = (float)-Math.Acos(Vector3.Dot(basis, Vector3.Normalize(look)));
+            }
 
+            return angle;
         }
 
         public float getPitch()

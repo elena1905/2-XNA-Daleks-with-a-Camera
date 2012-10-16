@@ -89,12 +89,12 @@ namespace Steering
             float timeDelta = (float) gameTime.ElapsedGameTime.TotalSeconds;
             float speed = 5.0f;
             KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.P))
+            if (keyState.IsKeyDown(Keys.L))
             {
                 strafe(speed * timeDelta);
             }
 
-            if (keyState.IsKeyDown(Keys.O))
+            if (keyState.IsKeyDown(Keys.J))
             {
                 strafe(-speed * timeDelta);
             }
@@ -118,12 +118,12 @@ namespace Steering
                 yaw(-speed * timeDelta);
             }
 
-            if (keyState.IsKeyDown(Keys.K))
+            if (keyState.IsKeyDown(Keys.I))
             {
                 pos.Y += speed * timeDelta;
             }
 
-            if (keyState.IsKeyDown(Keys.M))
+            if (keyState.IsKeyDown(Keys.K))
             {
                 pos.Y -= speed * timeDelta;
             }

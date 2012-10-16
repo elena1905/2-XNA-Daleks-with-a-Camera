@@ -90,12 +90,12 @@ namespace Steering
 
             if (keyboardState.IsKeyDown(Keys.A))
             {
-                strafe(timeDelta);   
+                strafe(-timeDelta);   
             }
 
             if (keyboardState.IsKeyDown(Keys.D))
             {
-                strafe(-timeDelta);   
+                strafe(timeDelta);   
             }
             
             view = Matrix.CreateLookAt(pos, pos + look, up);
