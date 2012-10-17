@@ -83,7 +83,7 @@ namespace Steering
 
             // Add enemy dalek
             EnemyDalek enemy = new EnemyDalek();
-            enemy.pos = new Vector3(10, 0, -10);
+            enemy.pos = new Vector3(50, 0, -50);
             enemy.DrawAxis = true;
             children.Add(enemy);
 
@@ -106,9 +106,9 @@ namespace Steering
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            foreach (Entity child in children)
+            for (int i = 0; i < children.Count(); i++)
             {
-                child.LoadContent();
+                children[i].LoadContent();
             }
 
         }
@@ -119,9 +119,9 @@ namespace Steering
         /// </summary>
         protected override void UnloadContent()
         {
-            foreach (Entity child in children)
+            for (int i = 0; i < children.Count(); i++)
             {
-                child.UnloadContent();
+                children[i].UnloadContent();
             }
 
         }
@@ -160,16 +160,23 @@ namespace Steering
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            
             spriteBatch.Begin();
-            foreach (Entity child in children)
+
+            // Draw children entities
+            for (int i = 0; i < children.Count(); i++)
             {
                 DepthStencilState state = new DepthStencilState();
                 state.DepthBufferEnable = true;                
                 GraphicsDevice.DepthStencilState = state;
-                child.Draw(gameTime);
+                children[i].Draw(gameTime);
             }
-            spriteBatch.End();            
+
+            // Draw any lines
+            Line.Draw();
+
+            spriteBatch.End();
+            
         }
 
         public Camera Camera

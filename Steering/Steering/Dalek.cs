@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+//using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -21,6 +22,12 @@ namespace Steering
         private Dalek target = null;
         public Vector3 offset;
         bool added = false;
+
+        protected Song sound;
+
+        //[DllImport("winmm.dll")]
+        //public static extern long PlaySound(String fileName, long a, long b);
+
         public Dalek Target
         {
             get { return target; }
@@ -40,7 +47,7 @@ namespace Steering
         public float maxSpeed = 5.0f;
         BasicEffect basicEffect;
         bool drawAxis;
-        float lastFired = 0.0f;
+        protected float lastFired = 0.25f;
 
         List<Vector3> feelers = new List<Vector3>();
         
@@ -77,6 +84,7 @@ namespace Steering
         public override void LoadContent()
         {            
             model = XNAGame.Instance().Content.Load<Model>("dalek");
+            sound = XNAGame.Instance().Content.Load<Song>("Exterminate");
         }
 
         public override void UnloadContent()
@@ -130,8 +138,15 @@ namespace Steering
 
             if (keyState.IsKeyDown(Keys.Space))
             {
+                if (lastFired >= 0.1f)
+                {
+                    lastFired = 0.0f;
 
-                // Fire a bullet!!
+                    // Fire lazer!!
+                    Fire();
+                }
+
+                lastFired += timeDelta;
             }
      
 
@@ -195,6 +210,35 @@ namespace Steering
                     XNAGame.Instance().GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, pointList, 0, 1);
                 }
             }            
+        }
+
+        protected void Fire()
+        {
+            PlayAlertSound();
+
+            Lazer lazer = new Lazer();
+
+            // Why load content explicitly???
+            lazer.LoadContent();
+
+            // Set bullet position where it should be fired
+            lazer.pos = pos + look * 10;
+            lazer.pos.Y = 5;
+
+            // Set direction at which bullet should be fired
+            lazer.look = look;
+
+            XNAGame.Instance().Children.Add(lazer);
+        }
+
+        protected void PlayAlertSound()
+        {
+            //PlaySound("Exterminate.mp3", 0, 0);
+            MediaPlayer.Play(sound);
+        }
+
+        protected void PlayFireSound()
+        {
         }
     }
 }

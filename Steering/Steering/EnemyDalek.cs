@@ -43,7 +43,19 @@ namespace Steering
             // player comes within 45 degree of its look vector
             if (fireAngle < 45 && distance < 20)
             {
+                // Play Exterminate sound effect
+                //PlayAlertSound();
+
+                // Rotate
                 look = Vector3.Normalize(toTarget);
+
+                // Fire lazer
+                if (lastFired >= 0.6f)
+                {
+                    lastFired = 0;
+                    Fire();
+                }
+                lastFired += timeDelta;
             }
 
             // 

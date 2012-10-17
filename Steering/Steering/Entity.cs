@@ -31,7 +31,6 @@ namespace Steering
 
         public float scale;
 
-        
         float mass = 1.0f;
 
         public Matrix worldTransform = new Matrix();
