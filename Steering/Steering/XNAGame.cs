@@ -83,7 +83,7 @@ namespace Steering
 
             // Add enemy dalek
             EnemyDalek enemy = new EnemyDalek();
-            enemy.pos = new Vector3(50, 0, -50);
+            enemy.pos = new Vector3(30, 0, -30);
             enemy.DrawAxis = true;
             children.Add(enemy);
 

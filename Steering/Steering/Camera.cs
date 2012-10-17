@@ -35,7 +35,7 @@ namespace Steering
         public Camera()
         {
             pos = new Vector3(0.0f, 30.0f, 50.0f);
-            look = new Vector3(0.0f, 0.0f, -1.0f);
+            look = new Vector3(0.0f, -0.6f, -1.0f);
         }
 
         public override void Update(GameTime gameTime)
