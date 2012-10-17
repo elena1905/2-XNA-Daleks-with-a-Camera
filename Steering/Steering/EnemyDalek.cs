@@ -19,6 +19,7 @@ namespace Steering
         Quaternion from;
         Quaternion to;
         float t;
+        static int count = 0;
 
         public EnemyDalek()
             : base()
@@ -45,6 +46,11 @@ namespace Steering
             {
                 // Play Exterminate sound effect
                 //PlayAlertSound();
+                if (0 == count)
+                {
+                    PlayAlertSound();
+                    count += 1;
+                }
 
                 // Rotate
                 look = Vector3.Normalize(toTarget);
@@ -56,6 +62,10 @@ namespace Steering
                     Fire();
                 }
                 lastFired += timeDelta;
+            }
+            else
+            {
+                count = 0;
             }
 
             // 

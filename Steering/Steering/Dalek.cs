@@ -23,7 +23,8 @@ namespace Steering
         public Vector3 offset;
         bool added = false;
 
-        protected Song sound;
+        protected Song alertSound;
+        protected Song fireSound;
 
         //[DllImport("winmm.dll")]
         //public static extern long PlaySound(String fileName, long a, long b);
@@ -84,7 +85,8 @@ namespace Steering
         public override void LoadContent()
         {            
             model = XNAGame.Instance().Content.Load<Model>("dalek");
-            sound = XNAGame.Instance().Content.Load<Song>("Exterminate");
+            alertSound = XNAGame.Instance().Content.Load<Song>("Exterminate");
+            fireSound = XNAGame.Instance().Content.Load<Song>("dalek_shoot");
         }
 
         public override void UnloadContent()
@@ -214,7 +216,7 @@ namespace Steering
 
         protected void Fire()
         {
-            PlayAlertSound();
+            PlayFireSound();
 
             Lazer lazer = new Lazer();
 
@@ -234,11 +236,12 @@ namespace Steering
         protected void PlayAlertSound()
         {
             //PlaySound("Exterminate.mp3", 0, 0);
-            MediaPlayer.Play(sound);
+            MediaPlayer.Play(alertSound);
         }
 
         protected void PlayFireSound()
         {
+            MediaPlayer.Play(fireSound);
         }
     }
 }
