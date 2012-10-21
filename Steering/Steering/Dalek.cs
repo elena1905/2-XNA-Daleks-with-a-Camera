@@ -108,14 +108,18 @@ namespace Steering
             {
                 strafe(-speed * timeDelta);
             }
+            float newtons = 5.0f;
             if (keyState.IsKeyDown(Keys.Up))
             {
-                walk(speed * timeDelta);
+                
+                forceAccum += look * newtons;
+                //walk(speed * timeDelta);
             }
 
             if (keyState.IsKeyDown(Keys.Down))
             {
-                walk(-speed * timeDelta);
+                forceAccum -= look * newtons;
+                //walk(-speed * timeDelta);
             }
 
             if (keyState.IsKeyDown(Keys.Left))
@@ -150,7 +154,12 @@ namespace Steering
 
                 lastFired += timeDelta;
             }
-     
+
+            Vector3 accel = forceAccum / Mass;
+            velocity = velocity + accel * timeDelta;
+            pos = pos + velocity * timeDelta;
+
+            forceAccum = Vector3.Zero;
 
             base.Update(gameTime);
         }

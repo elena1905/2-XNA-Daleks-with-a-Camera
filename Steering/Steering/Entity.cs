@@ -29,6 +29,8 @@ namespace Steering
         public Vector3 globalUp = new Vector3(0, 0, 1);
         public bool Alive = true;
 
+        public Vector3 forceAccum = Vector3.Zero;
+
         public float scale;
 
         float mass = 1.0f;
